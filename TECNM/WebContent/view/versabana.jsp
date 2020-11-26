@@ -127,23 +127,7 @@
                                         <tbody>
                                             <c:forEach items="${list}" var="u">  
 											<tr>
-												<td>
-													<%
-													conexion conex = new conexion();
-													try{
-														conex.Conectar();
-														String sql = "Select * from materia where ;";
-														conex.st=conex.conec.createStatement();
-										                conex.rt=conex.st.executeQuery(sql);
-										                while (conex.rt.next()){
-										                    out.println("<option>"+conex.rt.getString(3)+"</option>");
-										                }
-										                }catch(Exception e){
-										                    out.print(e.toString());
-													}
-													%>
-												</td>
-												<!--<td>${u.getId_materia()}</td>
+												<td>${u.getId_materia()}</td>
 												<td>${u.getClavemateria()}</td>
 												<td>${u.getClavehorario()}</td>  
 												<td>${u.getMateria()}</td>
@@ -167,7 +151,7 @@
 												<td>${u.getJueveshora()}</td>
 												<td>${u.getJuevessalon()}</td>
 												<td>${u.getVierneshora()}</td>
-												<td>${u.getViernessalon()}</td>-->
+												<td>${u.getViernessalon()}</td>
 											</tr>  
 										</c:forEach>
                                         </tbody>

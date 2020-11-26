@@ -90,12 +90,11 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-body">
 	                                    <%  
-											String id_materia=request.getParameter("id_materia");  
-											materia u=materiaDAO.getRecordById(Integer.parseInt(id_materia));  
+											String id=request.getParameter("id_materia");  
+											materia u=materiaDAO.getRecordById(Integer.parseInt(id));
 										%>
-                                        <form action="agregarmateria.jsp" method="post">
+                                        <form action="editarmateria.jsp" method="post">
                                             <div class="form-row">
-                                            <input type="text" name="id" value="<%=u.getClavemaestro() %>" readonly/>
                                             	<div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="clavehorario">Clave del horario</label>
@@ -120,10 +119,10 @@
                                                         <select name="carrera" class="form-control">
                                                         <option><%=u.getCarrera() %></option>
 														<%
-														String usu = sesion.getAttribute("user").toString();
-														request.setAttribute("usuario", usu);
-                                                       	List<carrera> list=carreraDAO.getCarrera(usu); 
-														request.setAttribute("list",list);
+															String usu = sesion.getAttribute("user").toString();
+															request.setAttribute("usuario", usu);
+		                                                    List<carrera> list=carreraDAO.getCarrera(usu); 
+															request.setAttribute("list",list);
 														%>
 														<c:forEach items="${list}" var="carrera">
 														 	<option>
@@ -329,6 +328,12 @@
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="viernessalon">Salón para el Viernes</label>
                                                         <input class="form-control py-4" name="viernessalon" id="viernessalon" type="text" value="<%=u.getViernessalon() %>" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="clavemaestro">ID Maestro </label>
+                                                        <input class="form-control py-4" name="clavemaestro" id="clavemaestro" type="text" value="<%=u.getClavemaestro() %>" readonly/>
                                                     </div>
                                                 </div>
                                             </div>

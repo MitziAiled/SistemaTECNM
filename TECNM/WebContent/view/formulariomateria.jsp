@@ -278,7 +278,7 @@
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="jueveshora">Horario para el Jueves</label>
                                                         <select name="luneshora" class="form-control">
-                                                        	<option value=" "></option>
+                                                        	<option value=" "> </option>
                                                         	<option value="7:00 - 8:40">7:00 - 8:40</option>
                                                         	<option value="8:45 - 10:25">8:45 - 10:25</option>
                                                         	<option value="10:30 - 12:10">10:30 - 12:10</option>
@@ -300,7 +300,7 @@
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="vierneshora">Horario para el Viernes</label>
                                                         <select name="luneshora" class="form-control">
-                                                        	<option value=" "></option>
+                                                        	<option value=" "> </option>
                                                         	<option value="7:00 - 8:40">7:00 - 8:40</option>
                                                         	<option value="8:45 - 10:25">8:45 - 10:25</option>
                                                         	<option value="10:30 - 12:10">10:30 - 12:10</option>

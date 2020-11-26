@@ -85,45 +85,49 @@
                             su costado derecho de cada registro.</li>
                         </ol>
                         <div class="container">
-                        <div class="container-fluid">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                <%  
-								//List<materia> list = materiaDAO.getAllRecords();  
-								//request.setAttribute("list",list);  
-								%>
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-												<th>Clavemateria</th>
-												<th>Materia</th>
-												<th>Carrera</th>
-												<th>Maestro</th>
-												<th>Créditos</th>
-												<th colspan="2">Opciones</th>
-												
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${list}" var="u">  
-											<tr>
-												<td>${u.getId_materia()}</td>
-												<td>${u.getClavemateria()}</td> 
-												<td>${u.getMateria()}</td>
-												<td>${u.getCarrera()}</td>
-												<td>${u.getMaestro()}</td>
-												<td>${u.getCreditos()}</td>
-												<td><a href="formularioeditarmateria.jsp?id_materia=${u.getId_materia()}">Editar</a></td>
-												<td><a href="borrarmateria.jsp?id_materia=${u.getId_materia()}">Eliminar</a></td>
-											</tr>  
-										</c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        	<div class="container-fluid">
+                        		<div class="card mb-4">
+                            		<div class="card-body">
+                                		<div class="table-responsive">
+			                                <%  
+			                                String usu = sesion.getAttribute("user").toString();
+											request.setAttribute("usuario", usu);
+											List<materia> lista = materiaDAO.getMateriasByUsuario(usu);  
+											request.setAttribute("list",lista);   
+											%>
+			                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+			                                        <thead>
+			                                            <tr>
+			                                                <th>ID</th>
+															<th>Clavemateria</th>
+															<th>Materia</th>
+															<th>Carrera</th>
+															<th>Maestro</th>
+															<th>Créditos</th>
+															<th colspan="2">Opciones</th>
+															
+			                                            </tr>
+			                                        </thead>
+			                                        <tbody>
+			                                            <c:forEach items="${list}" var="u">  
+														<tr>
+															<td>${u.getId_materia()}</td>
+															<td>${u.getClavemateria()}</td> 
+															<td>${u.getMateria()}</td>
+															<td>${u.getCarrera()}</td>
+															<td>${u.getMaestro()}</td>
+															<td>${u.getCreditos()}</td>
+															<td><a href="formularioeditarmateria.jsp?id_materia=${u.getId_materia()}">Editar</a></td>
+															<td><a href="borrarmateria.jsp?id_materia=${u.getId_materia()}">Eliminar</a></td>
+														</tr>  
+													</c:forEach>
+			                                        </tbody>
+			                                    </table>
+                                		</div>
+                            		</div>
+                        		</div>
+                    		</div>
+                    	</div>
                     </div>
                 </main>
             </div>

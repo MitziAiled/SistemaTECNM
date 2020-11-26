@@ -44,7 +44,6 @@ maestro VARCHAR(255) NOT NULL,
 PRIMARY KEY (id)
 );
 
-/*EN PRUEBA*/
 CREATE TABLE materia (
 id_materia INT NOT NULL AUTO_INCREMENT,
 clavemaestro int NOT NULL,
