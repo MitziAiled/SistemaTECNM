@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="dao.*,model.*,java.util.*"%> 
+<%@page import="model.*,java.util.*"%> 
 <%@page import="controller.conexion"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -68,7 +68,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 SABANA
                             </a>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="verreporte.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 REPORTES
                             </a>

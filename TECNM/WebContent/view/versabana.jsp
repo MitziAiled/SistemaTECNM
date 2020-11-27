@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="dao.*,java.util.*, model.*"%>  
+<%@page import="java.util.*, model.*"%>  
 <%@page import="controller.conexion"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -64,11 +64,11 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 CARGAR ARCHIVO DE MATERIAS (csv)
                             </a>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="versabana.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 SABANA
                             </a>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="verreporte.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 REPORTES
                             </a>
@@ -90,8 +90,10 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                 <%  
-								List<materia> list = materiaDAO.getAllRecordsC();  
-								request.setAttribute("list",list);  
+                                String usu = sesion.getAttribute("user").toString();
+								request.setAttribute("usuario", usu);
+								List<materia> lista = materiaDAO.getAllRecordsC(usu);  
+								request.setAttribute("list",lista);  
 								%>
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>

@@ -1,4 +1,4 @@
-package dao;
+package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
-import model.materia;
 
 public class materiaDAO {
 	public static Connection getConnection(){  
@@ -191,16 +189,22 @@ public class materiaDAO {
 	    return status;  
 	}
 	
-	public static List<materia> getAllRecordsC(){  
+	public static List<materia> getAllRecordsC(String usuario){  
 	    List<materia> list=new ArrayList<materia>();  
 	      
 	    try{  
 	        Connection con=getConnection();  
-	        PreparedStatement ps=con.prepareStatement("select id_materia,clavemateria,clavehorario,materia,"
-	        		+ "carrera, maestro, periodoescolar, turno, campus, grupo, alumnos, semestre, creditos, horas_t,"
-	        		+ "horas_p, luneshora, lunessalon, marteshora, martessalon, miercoleshora, miercolessalon, "
-	        		+ "jueveshora, juevessalon, vierneshora, viernessalon "
-	        		+ "from materia order by carrera");  
+	        PreparedStatement ps=con.prepareStatement("SELECT m.id_materia, m.clavemateria, "
+	        		+ "m.clavehorario, m.materia, m.carrera, m.maestro, m.periodoescolar, "
+	        		+ "m.turno, m.campus, m.grupo, m.alumnos, m.semestre, m.creditos, "
+	        		+ "m.horas_t, m.horas_p, m.luneshora, m.lunessalon, m.marteshora, "
+	        		+ "m.martessalon, m.miercoleshora, m.miercolessalon, m.jueveshora, "
+	        		+ "m.juevessalon, m.vierneshora, m.viernessalon "
+	        		+ "FROM materia AS m "
+	        		+ "JOIN usuario AS u ON m.clavemaestro=u.clavemaestro "
+	        		+ "WHERE u.usuario=? "
+	        		+ "ORDER BY m.carrera;");  
+	        ps.setString(1,usuario);
 	        ResultSet rs=ps.executeQuery();  
 	        while(rs.next()){  
 	            materia u=new materia();  

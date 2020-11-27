@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <%@page import="model.*,java.util.*"%>  
 <%@page import="controller.*"%>
-<%@page import="dao.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
