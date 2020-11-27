@@ -1,23 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.*, model.*"%>  
-<%@page import="controller.conexion"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-	<head>
-		<meta charset="utf-8" />
+<%@page import="model.*"%> 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Reportes por maestro</title>
+        <title>Reporte del maestro</title>
         <link href="startbootstrap-sb-admin-gh-pages/dist/css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-	</head>
-	<body>
-		<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="jefe.jsp">JEFE DE CARRERA</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
 
@@ -79,45 +77,81 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">Reportes por Maestro</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">En el siguiente apartado se mostrara una lista de los maestros de los
-                            cuales es usted jefe y podra visualizar el reporte de sus respectivas materias de cada uno de estos.</li>
-                        </ol>
+                        <h1 class="mt-4">Reporte de Maestro</h1>
                         <div class="container">
-                        <div class="container-fluid">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                <%  
-                                String usu = sesion.getAttribute("user").toString();
-								request.setAttribute("usuario", usu);
-								//List<materia> lista = materiaDAO.getAllRecordsC(usu);  
-								//request.setAttribute("list",lista);  
-								List<reporte> list = reporteDAO.getAllRecords(usu);  
-								request.setAttribute("list",list);  
-								%>
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-											<tr>
-												<th>CLAVE MAESTRO</th>	
-												<th>MAESTRO</th>
-												<th>REPORTE</th>
-											</tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${list}" var="u">  
-											<tr>
-												<td>${u.getClavemaestro()}</td>
-												<td>${u.getMaestro()}</td> 
-												<td><a href="formularioreporte.jsp?clavemaestro=${u.getClavemaestro()}">Ver reporte</a></td>
-											</tr>  
-										</c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        	<div class="container-fluid">
+                        		<div class="card mb-4">
+                        			<div class="card-header">
+                                		<i class="fas fa-table mr-1"></i>
+                                		Información del maestro
+                            		</div>
+                            		<div class="card-body">
+                                		<div class="table-responsive">
+                                			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+												<tr>
+													<td>Nombre del Maestro: </td>
+													<td>${list[0].getMaestro()}</td>
+												</tr>
+												<tr>
+													<td>Clave del maestro: </td>
+													<td>${list[0].getClavemaestro()}</td>
+												</tr>
+												<tr>
+													<td>Horas por impartir: </td>
+													<td>${list[0].getCreditos()}</td>
+												</tr>
+											</table>
+			                                <%  
+											//List<usuario> list = usuarioDAO.getAllRecords();  
+											//request.setAttribute("list",list);  
+											%>
+			                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+		                                        <thead>
+		                                            <tr>
+		                                                <td>Clave Materia</td>
+														<td>Materia</td>
+														<td>Grupo</td>
+														<td>Salon</td>
+														<td>Alumnos</td>
+														<td>Clave Carrera</td>
+														<td>Semestre</td>
+														<td>Lunes</td>
+														<td>Martes</td>
+														<td>Miercoles</td>
+														<td>Jueves</td>
+														<td>Viernes</td>
+														<td>HT</td>
+														<td>HP</td>
+														<td>Creditos</td>
+		                                            </tr>
+		                                        </thead>
+		                                        <tbody>
+		                                            <c:forEach items="${list}" var="u">  
+													<tr>
+														<td>${report.getClavemateria()}</td>
+												 		<td>${report.getMateria()}</td>
+												 		<td>${report.getGrupo()}</td>
+												 		<td>${report.getSalon()}</td>
+												 		<td>${report.getAlumnos()}</td>
+												 		<td>${report.getClavecarrera()}</td>
+												 		<td>${report.getSemestre()}</td>
+												 		<td>${report.getLunes()}</td>
+												 		<td>${report.getMartes()}</td>
+												 		<td>${report.getMiercoles()}</td>
+												 		<td>${report.getJueves()}</td>
+												 		<td>${report.getViernes()}</td>
+												 		<td>${report.getHorast()}</td>
+												 		<td>${report.getHorasp()}</td>
+												 		<td>${report.getCreditos()}</td>   
+													</tr>  
+													</c:forEach>
+		                                        </tbody>
+		                                    </table>
+                                		</div>
+                            		</div>
+                        		</div>
+                    		</div>
+                    	</div>
                     </div>
                 </main>
             </div>
@@ -131,5 +165,5 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/datatables-demo.js"></script>
-	</body>
+    </body>
 </html>
