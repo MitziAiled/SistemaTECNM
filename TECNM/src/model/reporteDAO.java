@@ -20,6 +20,7 @@ public class reporteDAO {
 	    return con;  
 	} 
 	
+	//Para obtener la lista de los maestros que tiene cada jefe
 	public static List<reporte> getAllRecords(String usuario){  
 	    List<reporte> list = new ArrayList<reporte>();  
 	      
@@ -30,7 +31,7 @@ public class reporteDAO {
 	        		+ "JOIN maestro AS maes ON mat.maestro = maes.nombre "
 	        		+ "JOIN usuario AS us ON mat.clavemaestro=us.clavemaestro "
 	        		+ "WHERE us.usuario=? "
-	        		+ "ORDER BY us.clavemaestro;");  
+	        		+ "ORDER BY mat.clavemaestro;");  
 	        ps.setString(1,usuario);
 	        ResultSet rs=ps.executeQuery();  
 	        while(rs.next()){  
@@ -46,38 +47,40 @@ public class reporteDAO {
 	    return list;  
 	}
 	
-	/*public static List<reporte> getAllInformation(int clavemaestro){  
+	//Para obtener el reporte que se muestra al jefe
+	public static List<reporte> getAllInformation(int clavemaestro){  
 	    List<reporte> list = new ArrayList<reporte>();  
 	      
 	    try{  
 	        Connection con=getConnection();  
-	        PreparedStatement ps=con.prepareStatement("SELECT sabana.maestro, sabana.clavemaestro, sabana.clavemateria, " + 
-	        		"sabana.materia, sabana.grupo, sabana.salon, sabana.alumnos, sabana.clavecarrera, sabana.semestre, " + 
-	        		"sabana.lunes, sabana.martes, sabana.miercoles,sabana.jueves, " + 
-	        		"sabana.viernes, sabana.horast, sabana.horasp, sabana.creditos " + 
-	        		"FROM sabana " + 
-	        		"JOIN usuario ON sabana.clavemaestro = usuario.clavemaestro " + 
-	        		"WHERE usuario.clavemaestro = ?");  
+	        PreparedStatement ps=con.prepareStatement("SELECT DISTINCT m.maestro, m.clavemaestro, m.creditos,"
+	        		+ "m.clavemateria, m.materia, m.grupo, m.alumnos, carrera.clavecarrera, m.semestre,"
+	        		+ "m.luneshora, m.marteshora, m.miercoleshora, m.jueveshora, m.vierneshora, m.horas_t,"
+	        		+ "m.horas_p, m.creditos "
+	        		+ "FROM materia as m "
+	        		+ "JOIN maestro ON m.maestro = maestro.nombre "
+	        		+ "JOIN carrera ON carrera.carrera = m.carrera "
+	        		+ "WHERE maestro.clavemaestro = ?");  
 	        ps.setInt(1, clavemaestro);
 	        ResultSet rs=ps.executeQuery();  
 	        while(rs.next()){  
 	            reporte u=new reporte();  
 	            u.setClavemaestro(rs.getInt("clavemaestro"));  
 	            u.setMaestro(rs.getString("maestro"));
+	            u.setCreditos(rs.getInt("creditos"));
 	            u.setClavemateria(rs.getString("clavemateria"));
 	            u.setMateria(rs.getString("materia"));
 	            u.setGrupo(rs.getString("grupo"));
-	            u.setSalon(rs.getString("salon"));
 	            u.setAlumnos(rs.getInt("alumnos"));
 	            u.setClavecarrera(rs.getString("clavecarrera"));
 	            u.setSemestre(rs.getInt("semestre"));
-	            u.setLunes(rs.getString("lunes"));
-	            u.setMartes(rs.getString("martes"));
-	            u.setMiercoles(rs.getString("miercoles"));
-	            u.setJueves(rs.getString("jueves"));
-	            u.setViernes(rs.getString("viernes"));
-	            u.setHorast(rs.getInt("horast"));
-	            u.setHorasp(rs.getInt("horasp"));
+	            u.setLuneshora(rs.getString("luneshora"));
+	            u.setMarteshora(rs.getString("marteshora"));
+	            u.setMiercoleshora(rs.getString("miercoleshora"));
+	            u.setJueveshora(rs.getString("jueveshora"));
+	            u.setVierneshora(rs.getString("vierneshora"));
+	            u.setHorast(rs.getInt("horas_t"));
+	            u.setHorasp(rs.getInt("horas_p"));
 	            u.setCreditos(rs.getInt("creditos"));
 	            list.add(u);  
 	        }  
@@ -93,13 +96,17 @@ public class reporteDAO {
 	      
 	    try{  
 	        Connection con=getConnection();  
-	        PreparedStatement ps=con.prepareStatement("SELECT sabana.maestro, sabana.clavemaestro, sabana.clavemateria, " + 
-	        		"sabana.materia, sabana.grupo, sabana.salon, sabana.alumnos, sabana.clavecarrera, sabana.semestre, " + 
-	        		"sabana.lunes, sabana.martes, sabana.miercoles,sabana.jueves, " + 
-	        		"sabana.viernes, sabana.horast, sabana.horasp, sabana.creditos " + 
-	        		"FROM sabana " + 
-	        		"JOIN usuario ON sabana.clavemaestro = usuario.clavemaestro " + 
-	        		"WHERE usuario.usuario = ?");  
+	        PreparedStatement ps=con.prepareStatement("SELECT DISTINCT materia.maestro, "
+	        		+ "maestro.clavemaestro, materia.clavemateria, materia.materia, "
+	        		+ "materia.grupo, materia.alumnos, carrera.clavecarrera, materia.semestre, "
+	        		+ "materia.luneshora, materia.marteshora, materia.miercoleshora, "
+	        		+ "materia.jueveshora, materia.vierneshora, materia.horas_t, "
+	        		+ "materia.horas_p, materia.creditos "
+	        		+ "FROM materia "
+	        		+ "JOIN carrera ON carrera.carrera = materia.carrera "
+	        		+ "JOIN maestro ON materia.maestro = maestro.nombre "
+	        		+ "JOIN usuario ON maestro.clavemaestro = usuario.clavemaestro "
+	        		+ "WHERE usuario.usuario = ?");  
 	        ps.setString(1, usuario);
 	        ResultSet rs=ps.executeQuery();  
 	        while(rs.next()){  
@@ -109,17 +116,16 @@ public class reporteDAO {
 	            u.setClavemateria(rs.getString("clavemateria"));
 	            u.setMateria(rs.getString("materia"));
 	            u.setGrupo(rs.getString("grupo"));
-	            u.setSalon(rs.getString("salon"));
 	            u.setAlumnos(rs.getInt("alumnos"));
 	            u.setClavecarrera(rs.getString("clavecarrera"));
 	            u.setSemestre(rs.getInt("semestre"));
-	            u.setLunes(rs.getString("lunes"));
-	            u.setMartes(rs.getString("martes"));
-	            u.setMiercoles(rs.getString("miercoles"));
-	            u.setJueves(rs.getString("jueves"));
-	            u.setViernes(rs.getString("viernes"));
-	            u.setHorast(rs.getInt("horast"));
-	            u.setHorasp(rs.getInt("horasp"));
+	            u.setLuneshora(rs.getString("luneshora"));
+	            u.setMarteshora(rs.getString("marteshora"));
+	            u.setMiercoleshora(rs.getString("miercoleshora"));
+	            u.setJueveshora(rs.getString("jueveshora"));
+	            u.setVierneshora(rs.getString("vierneshora"));
+	            u.setHorast(rs.getInt("horas_t"));
+	            u.setHorasp(rs.getInt("horas_p"));
 	            u.setCreditos(rs.getInt("creditos"));
 	            list.add(u);  
 	        }  
@@ -128,7 +134,8 @@ public class reporteDAO {
 	    }  
 	    
 	    return list;  
-	}*/
+	}
+	
 	
 }
 

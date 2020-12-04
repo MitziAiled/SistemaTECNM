@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="model.*"%> 
+<%@page import="model.*, java.util.*"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -87,6 +88,12 @@
                             		</div>
                             		<div class="card-body">
                                 		<div class="table-responsive">
+                                		<%  
+											String clavemaestro=request.getParameter("clavemaestro");
+											request.setAttribute("clavemaestro", clavemaestro);
+											List<reporte> list = reporteDAO.getAllInformation(Integer.parseInt(clavemaestro));  
+											request.setAttribute("list",list); 
+										%>
                                 			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 												<tr>
 													<td>Nombre del Maestro: </td>
@@ -101,17 +108,12 @@
 													<td>${list[0].getCreditos()}</td>
 												</tr>
 											</table>
-			                                <%  
-											//List<usuario> list = usuarioDAO.getAllRecords();  
-											//request.setAttribute("list",list);  
-											%>
 			                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 		                                        <thead>
 		                                            <tr>
 		                                                <td>Clave Materia</td>
 														<td>Materia</td>
 														<td>Grupo</td>
-														<td>Salon</td>
 														<td>Alumnos</td>
 														<td>Clave Carrera</td>
 														<td>Semestre</td>
@@ -126,20 +128,19 @@
 		                                            </tr>
 		                                        </thead>
 		                                        <tbody>
-		                                            <c:forEach items="${list}" var="u">  
+		                                            <c:forEach items="${list}" var="report">  
 													<tr>
 														<td>${report.getClavemateria()}</td>
 												 		<td>${report.getMateria()}</td>
 												 		<td>${report.getGrupo()}</td>
-												 		<td>${report.getSalon()}</td>
 												 		<td>${report.getAlumnos()}</td>
 												 		<td>${report.getClavecarrera()}</td>
 												 		<td>${report.getSemestre()}</td>
-												 		<td>${report.getLunes()}</td>
-												 		<td>${report.getMartes()}</td>
-												 		<td>${report.getMiercoles()}</td>
-												 		<td>${report.getJueves()}</td>
-												 		<td>${report.getViernes()}</td>
+												 		<td>${report.getLuneshora()}</td>
+												 		<td>${report.getMarteshora()}</td>
+												 		<td>${report.getMiercoleshora()}</td>
+												 		<td>${report.getJueveshora()}</td>
+												 		<td>${report.getVierneshora()}</td>
 												 		<td>${report.getHorast()}</td>
 												 		<td>${report.getHorasp()}</td>
 												 		<td>${report.getCreditos()}</td>   

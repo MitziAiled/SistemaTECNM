@@ -11,12 +11,13 @@ public class reporte {
 	private String salon;
 	private int alumnos;
 	private String clavecarrera;
+	private String carrera;
 	private int semestre;
-	private String lunes;
-	private String martes;
-	private String miercoles;
-	private String jueves;
-	private String viernes;
+	private String luneshora;
+	private String marteshora;
+	private String miercoleshora;
+	private String jueveshora;
+	private String vierneshora;
 	private int horast;
 	private int horasp;
 	private int creditos;
@@ -86,35 +87,35 @@ public class reporte {
 	public void setSemestre(int semestre) {
 		this.semestre = semestre;
 	}
-	public String getLunes() {
-		return lunes;
+	public String getLuneshora() {
+		return luneshora;
 	}
-	public void setLunes(String lunes) {
-		this.lunes = lunes;
+	public void setLuneshora(String luneshora) {
+		this.luneshora = luneshora;
 	}
-	public String getMartes() {
-		return martes;
+	public String getMarteshora() {
+		return marteshora;
 	}
-	public void setMartes(String martes) {
-		this.martes = martes;
+	public void setMarteshora(String marteshora) {
+		this.marteshora = marteshora;
 	}
-	public String getMiercoles() {
-		return miercoles;
+	public String getMiercoleshora() {
+		return miercoleshora;
 	}
-	public void setMiercoles(String miercoles) {
-		this.miercoles = miercoles;
+	public void setMiercoleshora(String miercoleshora) {
+		this.miercoleshora = miercoleshora;
 	}
-	public String getJueves() {
-		return jueves;
+	public String getJueveshora() {
+		return jueveshora;
 	}
-	public void setJueves(String jueves) {
-		this.jueves = jueves;
+	public void setJueveshora(String jueveshora) {
+		this.jueveshora = jueveshora;
 	}
-	public String getViernes() {
-		return viernes;
+	public String getVierneshora() {
+		return vierneshora;
 	}
-	public void setViernes(String viernes) {
-		this.viernes = viernes;
+	public void setVierneshora(String vierneshora) {
+		this.vierneshora = vierneshora;
 	}
 	public int getHorast() {
 		return horast;
@@ -133,6 +134,12 @@ public class reporte {
 	}
 	public void setCreditos(int creditos) {
 		this.creditos = creditos;
+	}
+	public String getCarrera() {
+		return carrera;
+	}
+	public void setCarrera(String carrera) {
+		this.carrera = carrera;
 	}
 	
 	

@@ -66,12 +66,12 @@
                             en el presente sistema podra visualizar el reporte de las materias que imparte, incluyendo sus horarios,
                             salones, numero de alumnos y horarios.</li>
                         </ol>
-                        <!--%
+                        <%
 						String usu = sesion.getAttribute("user").toString();
-						request.setAttribute("usuario", usu);
+						//request.setAttribute("usuario", usu);
 						List<reporte> list = reporteDAO.getAllTeacher(usu);  
 						request.setAttribute("list",list); 
-						%-->
+						%>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table mr-1"></i>
@@ -99,7 +99,6 @@
                                                 <th>Clave Materia</th>
 												<th>Materia</th>
 												<th>Grupo</th>
-												<th>Salon</th>
 												<th>Alumnos</th>
 												<th>Clave Carrera</th>
 												<th>Semestre</th>
@@ -113,40 +112,20 @@
 												<th>Creditos</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Clave Materia</th>
-												<th>Materia</th>
-												<th>Grupo</th>
-												<th>Salon</th>
-												<th>Alumnos</th>
-												<th>Clave Carrera</th>
-												<th>Semestre</th>
-												<th>Lunes</th>
-												<th>Martes</th>
-												<th>Miercoles</th>
-												<th>Jueves</th>
-												<th>Viernes</th>
-												<th>HT</th>
-												<th>HP</th>
-												<th>Creditos</th>
-                                            </tr>
-                                        </tfoot>
                                         <tbody>
                                             <c:forEach items="${list}" var="report">
 											 	<tr>
 											 		<td>${report.getClavemateria()}</td>
 											 		<td>${report.getMateria()}</td>
 											 		<td>${report.getGrupo()}</td>
-											 		<td>${report.getSalon()}</td>
 											 		<td>${report.getAlumnos()}</td>
 											 		<td>${report.getClavecarrera()}</td>
 											 		<td>${report.getSemestre()}</td>
-											 		<td>${report.getLunes()}</td>
-											 		<td>${report.getMartes()}</td>
-											 		<td>${report.getMiercoles()}</td>
-											 		<td>${report.getJueves()}</td>
-											 		<td>${report.getViernes()}</td>
+											 		<td>${report.getLuneshora()}</td>
+											 		<td>${report.getMarteshora()}</td>
+											 		<td>${report.getMiercoleshora()}</td>
+											 		<td>${report.getJueveshora()}</td>
+											 		<td>${report.getVierneshora()}</td>
 											 		<td>${report.getHorast()}</td>
 											 		<td>${report.getHorasp()}</td>
 											 		<td>${report.getCreditos()}</td>

@@ -91,9 +91,7 @@
                                 <div class="table-responsive">
                                 <%  
                                 String usu = sesion.getAttribute("user").toString();
-								request.setAttribute("usuario", usu);
-								//List<materia> lista = materiaDAO.getAllRecordsC(usu);  
-								//request.setAttribute("list",lista);  
+								request.setAttribute("usuario", usu); 
 								List<reporte> list = reporteDAO.getAllRecords(usu);  
 								request.setAttribute("list",list);  
 								%>
