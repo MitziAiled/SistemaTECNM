@@ -35,7 +35,7 @@
                                             </div>
                                             
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <button class="btn btn-primary" type="submit" name="ingresar" >Ingresar</a>
+                                                <button class="btn btn-primary" type="submit" name="ingresar" >Ingresar</button>
                                             </div>
                                         </form>
                                         <%

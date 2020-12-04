@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.*;
 
 public class usuarioDAO {
 	public static Connection getConnection(){  
@@ -107,4 +106,35 @@ public class usuarioDAO {
 	    }
 	    return u;
 	}
+	
+	//Para mostrar la información del perfil del usuario
+		public static List<usuario> getPerfil(String usuario){  
+		    List<usuario> list = new ArrayList<usuario>();  
+		      
+		    try{  
+		        Connection con=getConnection();  
+		        PreparedStatement ps=con.prepareStatement("SELECT clavemaestro, nombre, apellidopat, "
+		        		+ "apellidomat, tel, mail, depto, usuario, contrasena "
+		        		+ "FROM usuario WHERE usuario = ?");  
+		        ps.setString(1, usuario);
+		        ResultSet rs=ps.executeQuery();  
+		        while(rs.next()){  
+		            usuario u = new usuario();  
+		            u.setNombre(rs.getString("nombre"));
+		            u.setApellidopat(rs.getString("apellidopat"));
+		            u.setApellidomat(rs.getString("apellidomat"));
+		            u.setTel(rs.getString("tel"));
+		            u.setMail(rs.getString("mail"));
+		            u.setDepto(rs.getString("depto"));
+		            u.setUsuario(rs.getString("usuario"));
+		            u.setContrasena(rs.getString("contrasena"));
+		            u.setClavemaestro(rs.getInt("clavemaestro"));
+		            list.add(u);  
+		        }  
+		    }catch(Exception e){
+		    	System.out.println(e);
+		    }  
+		    
+		    return list;  
+		}
 }

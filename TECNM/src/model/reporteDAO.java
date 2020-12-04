@@ -91,6 +91,7 @@ public class reporteDAO {
 	    return list;  
 	}
 	
+	//Para mostrar el reporte de cada maestro que ingresa
 	public static List<reporte> getAllTeacher(String usuario){  
 	    List<reporte> list = new ArrayList<reporte>();  
 	      

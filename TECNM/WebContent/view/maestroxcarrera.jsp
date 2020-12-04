@@ -47,6 +47,10 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Menú</div>
+                             <a class="nav-link" href="perfil.jsp">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Perfil
+                            </a>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Carrera

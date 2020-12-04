@@ -49,6 +49,10 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Menú</div>
+                            <a class="nav-link" href="perfilmaestro.jsp">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Perfil
+                            </a>
                             <a class="nav-link" href="">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Ver mi reporte
@@ -68,7 +72,6 @@
                         </ol>
                         <%
 						String usu = sesion.getAttribute("user").toString();
-						//request.setAttribute("usuario", usu);
 						List<reporte> list = reporteDAO.getAllTeacher(usu);  
 						request.setAttribute("list",list); 
 						%>

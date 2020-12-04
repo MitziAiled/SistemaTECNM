@@ -85,265 +85,266 @@
                             continuación para modificar la información necesaria para la materia.</li>
                         </ol>
                         <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-body">
-	                                    <%  
-											String id=request.getParameter("id_materia");  
-											materia u=materiaDAO.getRecordById(Integer.parseInt(id));
-										%>
-                                        <form action="editarmateria.jsp" method="post">
-                                            <div class="form-row">
-                                            	<div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="clavehorario">Clave del horario</label>
-                                                        <input class="form-control py-4" name="clavehorario" id="clavehorario" type="text" value="<%=u.getClavehorario() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="clavemateria">Clave de la materia</label>
-                                                        <input class="form-control py-4" name="clavemateria" id="clavemateria" type="text" value="<%=u.getClavemateria() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="materia">Nombre de la materia</label>
-                                                        <input class="form-control py-4" name="materia" id="materia" type="text" value="<%=u.getMateria() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="carrera">Carrera</label>
-                                                        <select name="carrera" class="form-control">
-                                                        <option><%=u.getCarrera() %></option>
-														<%
-															String usu = sesion.getAttribute("user").toString();
-															request.setAttribute("usuario", usu);
-		                                                    List<carrera> list=carreraDAO.getCarrera(usu); 
-															request.setAttribute("list",list);
-														%>
-														<c:forEach items="${list}" var="carrera">
-														 	<option>
-														 		${carrera.getCarrera()}
-														 	</option>
-													 	</c:forEach>
-														</select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="maestro">Maestro</label>
-                                                        <select name="maestro" class="form-control">
-                                                        	<option><%=u.getMaestro() %></option>
+                        	<div class="row justify-content-center">
+                            	<div class="col-lg-7">
+                                	<div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    	<div class="card-body">
+		                                    <%  
+												String id=request.getParameter("id_materia");  
+												materia u=materiaDAO.getRecordById(Integer.parseInt(id));
+											%>
+	                                        <form action="editarmateria.jsp" method="post">
+	                                            <div class="form-row">
+	                                            	<div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="clavehorario">Clave del horario</label>
+	                                                        <input class="form-control py-4" name="clavehorario" id="clavehorario" type="text" value="<%=u.getClavehorario() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="clavemateria">Clave de la materia</label>
+	                                                        <input class="form-control py-4" name="clavemateria" id="clavemateria" type="text" value="<%=u.getClavemateria() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="materia">Nombre de la materia</label>
+	                                                        <input class="form-control py-4" name="materia" id="materia" type="text" value="<%=u.getMateria() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="carrera">Carrera</label>
+	                                                        <select name="carrera" class="form-control">
+	                                                        <option><%=u.getCarrera() %></option>
 															<%
-															conexion conex = new conexion();
-															try{
-																conex.Conectar();
-																String sql = "Select * from maestro;";
-																conex.st=conex.conec.createStatement();
-												                conex.rt=conex.st.executeQuery(sql);
-												                while (conex.rt.next()){
-												                    out.println("<option>"+conex.rt.getString(3)+"</option>");
-												                }
-												                }catch(Exception e){
-												                    out.print(e.toString());
-															}
+																String usu = sesion.getAttribute("user").toString();
+																request.setAttribute("usuario", usu);
+			                                                    List<carrera> list=carreraDAO.getCarrera(usu); 
+																request.setAttribute("list",list);
 															%>
-														</select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="periodoescolar">Periodo Escolar</label>
-                                                        <select name="periodoescolar" class="form-control">
-                                                        	<option><%=u.getPeriodoescolar() %></option>
-                                                        	<option value="AGOSTO-DICIEMBRE 2020">AGOSTO-DICIEMBRE 2020</option>
-                                                        	<option value="ENERO-JUNIO 2021">ENERO-JUNIO 2021</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="turno">Turno</label>
-                                                        <select name="turno" class="form-control">
-                                                        	<option><%=u.getTurno() %></option>
-                                                        	<option value="Matutino">Matutino</option>
-                                                        	<option value="Vespertino">Vespertino</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="campus">Campus</label>
-                                                        <select name="campus" class="form-control">
-                                                        	<option><%=u.getCampus() %></option>
-                                                        	<option value="1">1</option>
-                                                        	<option value="2">2</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="grupo">Grupo</label>
-                                                        <input class="form-control py-4" name="grupo" id="grupo" type="text" value="<%=u.getGrupo() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="alumnos">Número de Alumnos</label>
-                                                        <input class="form-control py-4" name="alumnos" id="alumnos" type="text" value="<%=u.getAlumnos() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="semestre">Semestre</label>
-                                                        <input class="form-control py-4" name="semestre" id="semestre" type="text" value="<%=u.getSemestre() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="creditos">Creditos</label>
-                                                        <input class="form-control py-4" name="creditos" id="creditos" type="text" value="<%=u.getCreditos() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="horas_t">Horas teóricas</label>
-                                                        <input class="form-control py-4" name="horas_t" id="horas_t" type="text" value="<%=u.getHorast() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="horas_p">Horas prácticas</label>
-                                                        <input class="form-control py-4" name="horas_p" id="horas_p" type="text" value="<%=u.getHorasp() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="luneshora">Horario para el Lunes</label>
-                                                        <select name="luneshora" class="form-control">
-                                                        	<option><%=u.getLuneshora() %></option>
-                                                        	<option value="7:00 - 8:40">7:00 - 8:40</option>
-                                                        	<option value="8:45 - 10:25">8:45 - 10:25</option>
-                                                        	<option value="10:30 - 12:10">10:30 - 12:10</option>
-                                                        	<option value="12:15 - 13:55">12:15 - 13:55</option>
-                                                        	<option value="14:00 - 15:40">14:00 - 15:40</option>
-                                                        	<option value="15:45 - 17:25">15:45 - 17:25</option>
-                                                        	<option value="17:30 - 19:10">17:30 - 19:10</option>
-                                                        	<option value="19:15 - 20:55">19:15 - 20:55</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="lunessalon">Salón para el Lunes</label>
-                                                        <input class="form-control py-4" name="lunessalon" id="lunessalon" type="text" value="<%=u.getLunessalon() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="marteshora">Horario para el Martes</label>
-                                                        <select name="marteshora" class="form-control">
-                                                        	<option><%=u.getMarteshora() %></option>
-                                                        	<option value="7:00 - 8:40">7:00 - 8:40</option>
-                                                        	<option value="8:45 - 10:25">8:45 - 10:25</option>
-                                                        	<option value="10:30 - 12:10">10:30 - 12:10</option>
-                                                        	<option value="12:15 - 13:55">12:15 - 13:55</option>
-                                                        	<option value="14:00 - 15:40">14:00 - 15:40</option>
-                                                        	<option value="15:45 - 17:25">15:45 - 17:25</option>
-                                                        	<option value="17:30 - 19:10">17:30 - 19:10</option>
-                                                        	<option value="19:15 - 20:55">19:15 - 20:55</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="martessalon">Salón para el Martes</label>
-                                                        <input class="form-control py-4" name="martessalon" id="martessalon" type="text" value="<%=u.getMartessalon() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="miercoleshora">Horario para el Miércoles</label>
-                                                        <select name="miercoleshora" class="form-control">
-                                                        	<option><%=u.getMiercoleshora() %></option>
-                                                        	<option value="7:00 - 8:40">7:00 - 8:40</option>
-                                                        	<option value="8:45 - 10:25">8:45 - 10:25</option>
-                                                        	<option value="10:30 - 12:10">10:30 - 12:10</option>
-                                                        	<option value="12:15 - 13:55">12:15 - 13:55</option>
-                                                        	<option value="14:00 - 15:40">14:00 - 15:40</option>
-                                                        	<option value="15:45 - 17:25">15:45 - 17:25</option>
-                                                        	<option value="17:30 - 19:10">17:30 - 19:10</option>
-                                                        	<option value="19:15 - 20:55">19:15 - 20:55</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="miercolessalon">Salón para el Miércoles</label>
-                                                        <input class="form-control py-4" name="miercolessalon" id="miercolessalon" type="text" value="<%=u.getMiercolessalon() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="jueveshora">Horario para el Jueves</label>
-                                                        <select name="luneshora" class="form-control">
-                                                        	<option><%=u.getJueveshora() %></option>
-                                                        	<option value="7:00 - 8:40">7:00 - 8:40</option>
-                                                        	<option value="8:45 - 10:25">8:45 - 10:25</option>
-                                                        	<option value="10:30 - 12:10">10:30 - 12:10</option>
-                                                        	<option value="12:15 - 13:55">12:15 - 13:55</option>
-                                                        	<option value="14:00 - 15:40">14:00 - 15:40</option>
-                                                        	<option value="15:45 - 17:25">15:45 - 17:25</option>
-                                                        	<option value="17:30 - 19:10">17:30 - 19:10</option>
-                                                        	<option value="19:15 - 20:55">19:15 - 20:55</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="juevessalon">Salón para el Jueves</label>
-                                                        <input class="form-control py-4" name="juevessalon" id="juevessalon" type="text" value="<%=u.getJuevessalon() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="vierneshora">Horario para el Viernes</label>
-                                                        <select name="luneshora" class="form-control">
-                                                        	<option><%=u.getVierneshora() %></option>
-                                                        	<option value="7:00 - 8:40">7:00 - 8:40</option>
-                                                        	<option value="8:45 - 10:25">8:45 - 10:25</option>
-                                                        	<option value="10:30 - 12:10">10:30 - 12:10</option>
-                                                        	<option value="12:15 - 13:55">12:15 - 13:55</option>
-                                                        	<option value="14:00 - 15:40">14:00 - 15:40</option>
-                                                        	<option value="15:45 - 17:25">15:45 - 17:25</option>
-                                                        	<option value="17:30 - 19:10">17:30 - 19:10</option>
-                                                        	<option value="19:15 - 20:55">19:15 - 20:55</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="viernessalon">Salón para el Viernes</label>
-                                                        <input class="form-control py-4" name="viernessalon" id="viernessalon" type="text" value="<%=u.getViernessalon() %>" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="clavemaestro">ID Maestro </label>
-                                                        <input class="form-control py-4" name="clavemaestro" id="clavemaestro" type="text" value="<%=u.getClavemaestro() %>" readonly/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group mt-4 mb-0"><input class="btn btn-primary btn-block" type="submit" value="Editar"/></div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+															<c:forEach items="${list}" var="carrera">
+															 	<option>
+															 		${carrera.getCarrera()}
+															 	</option>
+														 	</c:forEach>
+															</select>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="maestro">Maestro</label>
+	                                                        <select name="maestro" class="form-control">
+	                                                        	<option><%=u.getMaestro() %></option>
+																<%
+																conexion conex = new conexion();
+																try{
+																	conex.Conectar();
+																	String sql = "Select * from maestro;";
+																	conex.st=conex.conec.createStatement();
+													                conex.rt=conex.st.executeQuery(sql);
+													                while (conex.rt.next()){
+													                    out.println("<option>"+conex.rt.getString(3)+"</option>");
+													                }
+													                }catch(Exception e){
+													                    out.print(e.toString());
+																}
+																%>
+															</select>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="periodoescolar">Periodo Escolar</label>
+	                                                        <select name="periodoescolar" class="form-control">
+	                                                        	<option><%=u.getPeriodoescolar() %></option>
+	                                                        	<option value="AGOSTO-DICIEMBRE 2020">AGOSTO-DICIEMBRE 2020</option>
+	                                                        	<option value="ENERO-JUNIO 2021">ENERO-JUNIO 2021</option>
+	                                                        </select>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="turno">Turno</label>
+	                                                        <select name="turno" class="form-control">
+	                                                        	<option><%=u.getTurno() %></option>
+	                                                        	<option value="Matutino">Matutino</option>
+	                                                        	<option value="Vespertino">Vespertino</option>
+	                                                        </select>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="campus">Campus</label>
+	                                                        <select name="campus" class="form-control">
+	                                                        	<option><%=u.getCampus() %></option>
+	                                                        	<option value="1">1</option>
+	                                                        	<option value="2">2</option>
+	                                                        </select>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="grupo">Grupo</label>
+	                                                        <input class="form-control py-4" name="grupo" id="grupo" type="text" value="<%=u.getGrupo() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="alumnos">Número de Alumnos</label>
+	                                                        <input class="form-control py-4" name="alumnos" id="alumnos" type="text" value="<%=u.getAlumnos() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="semestre">Semestre</label>
+	                                                        <input class="form-control py-4" name="semestre" id="semestre" type="text" value="<%=u.getSemestre() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="creditos">Creditos</label>
+	                                                        <input class="form-control py-4" name="creditos" id="creditos" type="text" value="<%=u.getCreditos() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="horas_t">Horas teóricas</label>
+	                                                        <input class="form-control py-4" name="horas_t" id="horas_t" type="text" value="<%=u.getHorast() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="horas_p">Horas prácticas</label>
+	                                                        <input class="form-control py-4" name="horas_p" id="horas_p" type="text" value="<%=u.getHorasp() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="luneshora">Horario para el Lunes</label>
+	                                                        <select name="luneshora" class="form-control">
+	                                                        	<option><%=u.getLuneshora() %></option>
+	                                                        	<option value="7:00 - 8:40">7:00 - 8:40</option>
+	                                                        	<option value="8:45 - 10:25">8:45 - 10:25</option>
+	                                                        	<option value="10:30 - 12:10">10:30 - 12:10</option>
+	                                                        	<option value="12:15 - 13:55">12:15 - 13:55</option>
+	                                                        	<option value="14:00 - 15:40">14:00 - 15:40</option>
+	                                                        	<option value="15:45 - 17:25">15:45 - 17:25</option>
+	                                                        	<option value="17:30 - 19:10">17:30 - 19:10</option>
+	                                                        	<option value="19:15 - 20:55">19:15 - 20:55</option>
+	                                                        </select>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="lunessalon">Salón para el Lunes</label>
+	                                                        <input class="form-control py-4" name="lunessalon" id="lunessalon" type="text" value="<%=u.getLunessalon() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="marteshora">Horario para el Martes</label>
+	                                                        <select name="marteshora" class="form-control">
+	                                                        	<option><%=u.getMarteshora() %></option>
+	                                                        	<option value="7:00 - 8:40">7:00 - 8:40</option>
+	                                                        	<option value="8:45 - 10:25">8:45 - 10:25</option>
+	                                                        	<option value="10:30 - 12:10">10:30 - 12:10</option>
+	                                                        	<option value="12:15 - 13:55">12:15 - 13:55</option>
+	                                                        	<option value="14:00 - 15:40">14:00 - 15:40</option>
+	                                                        	<option value="15:45 - 17:25">15:45 - 17:25</option>
+	                                                        	<option value="17:30 - 19:10">17:30 - 19:10</option>
+	                                                        	<option value="19:15 - 20:55">19:15 - 20:55</option>
+	                                                        </select>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="martessalon">Salón para el Martes</label>
+	                                                        <input class="form-control py-4" name="martessalon" id="martessalon" type="text" value="<%=u.getMartessalon() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="miercoleshora">Horario para el Miércoles</label>
+	                                                        <select name="miercoleshora" class="form-control">
+	                                                        	<option><%=u.getMiercoleshora() %></option>
+	                                                        	<option value="7:00 - 8:40">7:00 - 8:40</option>
+	                                                        	<option value="8:45 - 10:25">8:45 - 10:25</option>
+	                                                        	<option value="10:30 - 12:10">10:30 - 12:10</option>
+	                                                        	<option value="12:15 - 13:55">12:15 - 13:55</option>
+	                                                        	<option value="14:00 - 15:40">14:00 - 15:40</option>
+	                                                        	<option value="15:45 - 17:25">15:45 - 17:25</option>
+	                                                        	<option value="17:30 - 19:10">17:30 - 19:10</option>
+	                                                        	<option value="19:15 - 20:55">19:15 - 20:55</option>
+	                                                        </select>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="miercolessalon">Salón para el Miércoles</label>
+	                                                        <input class="form-control py-4" name="miercolessalon" id="miercolessalon" type="text" value="<%=u.getMiercolessalon() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="jueveshora">Horario para el Jueves</label>
+	                                                        <select name="luneshora" class="form-control">
+	                                                        	<option><%=u.getJueveshora() %></option>
+	                                                        	<option value="7:00 - 8:40">7:00 - 8:40</option>
+	                                                        	<option value="8:45 - 10:25">8:45 - 10:25</option>
+	                                                        	<option value="10:30 - 12:10">10:30 - 12:10</option>
+	                                                        	<option value="12:15 - 13:55">12:15 - 13:55</option>
+	                                                        	<option value="14:00 - 15:40">14:00 - 15:40</option>
+	                                                        	<option value="15:45 - 17:25">15:45 - 17:25</option>
+	                                                        	<option value="17:30 - 19:10">17:30 - 19:10</option>
+	                                                        	<option value="19:15 - 20:55">19:15 - 20:55</option>
+	                                                        </select>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="juevessalon">Salón para el Jueves</label>
+	                                                        <input class="form-control py-4" name="juevessalon" id="juevessalon" type="text" value="<%=u.getJuevessalon() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="vierneshora">Horario para el Viernes</label>
+	                                                        <select name="luneshora" class="form-control">
+	                                                        	<option><%=u.getVierneshora() %></option>
+	                                                        	<option value="7:00 - 8:40">7:00 - 8:40</option>
+	                                                        	<option value="8:45 - 10:25">8:45 - 10:25</option>
+	                                                        	<option value="10:30 - 12:10">10:30 - 12:10</option>
+	                                                        	<option value="12:15 - 13:55">12:15 - 13:55</option>
+	                                                        	<option value="14:00 - 15:40">14:00 - 15:40</option>
+	                                                        	<option value="15:45 - 17:25">15:45 - 17:25</option>
+	                                                        	<option value="17:30 - 19:10">17:30 - 19:10</option>
+	                                                        	<option value="19:15 - 20:55">19:15 - 20:55</option>
+	                                                        </select>
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="viernessalon">Salón para el Viernes</label>
+	                                                        <input class="form-control py-4" name="viernessalon" id="viernessalon" type="text" value="<%=u.getViernessalon() %>" />
+	                                                    </div>
+	                                                </div>
+	                                                <div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="clavemaestro">ID Maestro </label>
+	                                                        <input class="form-control py-4" name="clavemaestro" id="clavemaestro" type="text" value="<%=u.getClavemaestro() %>" readonly/>
+	                                                    </div>
+	                                                </div>
+	                                            </div>
+	                                            <div class="form-group mt-4 mb-0"><input class="btn btn-primary btn-block" type="submit" value="Editar"/></div>
+	                                        </form>
+                                    	</div>
+                                	</div>
+                            	</div>
+                        	</div>
+                    	</div>
+                   	</div>
                 </main>
             </div>
         </div>

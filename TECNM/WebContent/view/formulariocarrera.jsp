@@ -47,6 +47,10 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Menú</div>
+                             <a class="nav-link" href="perfil.jsp">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Perfil
+                            </a>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Carrera
@@ -80,50 +84,53 @@
                             el registro del maestro seleccionado como jefe de carrera para asignarle dicho rol.</li>
                         </ol>
                         <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-body">
-                                        <form action="agregarcarrera.jsp" method="post">
-                                            <div class="form-row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="carrera">Nombre de la Carrera</label>
-                                                        <input class="form-control py-4" name="carrera" id="carrera" type="text" placeholder="Ingresa nombre de carrera" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="clavecarrera">Clave de la Carrera</label>
-                                                        <input class="form-control py-4" name="clavecarrera" id="clavecarrera" type="text" placeholder="Ingresa clave de carrera" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="inputEmailAddress">Jefe de Carrera</label>
-                                                <select name="jefe" class="form-control">
-													<%
-													conexion conex = new conexion();
-													try{
-														conex.Conectar();
-														String sql = "Select * from maestro;";
-														conex.st=conex.conec.createStatement();
-										                conex.rt=conex.st.executeQuery(sql);
-										                while (conex.rt.next()){
-										                    out.println("<option>"+conex.rt.getString(3)+"</option>");
-										                }
-										                }catch(Exception e){
-										                    out.print(e.toString());
-													}
-													%>
-												</select>
-                                            </div>
-                                            <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" href="agregarcarrera.jsp">Registrar</a></div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        	<div class="row justify-content-center">
+                            	<div class="col-lg-7">
+                                	<div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    	<div class="card-body">
+                                        	<form action="agregarcarrera.jsp" method="post">
+                                            	<div class="form-row">
+                                                	<div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="carrera">Nombre de la Carrera</label>
+	                                                        <input class="form-control py-4" name="carrera" id="carrera" type="text" placeholder="Ingresa nombre de carrera" />
+	                                                    </div>
+                                                	</div>
+                                                	<div class="col-md-6">
+	                                                    <div class="form-group">
+	                                                        <label class="small mb-1" for="clavecarrera">Clave de la Carrera</label>
+	                                                        <input class="form-control py-4" name="clavecarrera" id="clavecarrera" type="text" placeholder="Ingresa clave de carrera" />
+	                                                    </div>
+                                                	</div>
+                                            	</div>
+                                            	<div class="form-group">
+	                                                <label class="small mb-1" for="inputEmailAddress">Jefe de Carrera</label>
+	                                                <select name="jefe" class="form-control">
+														<%
+														conexion conex = new conexion();
+														try{
+															conex.Conectar();
+															String sql = "Select * from maestro;";
+															conex.st=conex.conec.createStatement();
+											                conex.rt=conex.st.executeQuery(sql);
+											                while (conex.rt.next()){
+											                    out.println("<option>"+conex.rt.getString(3)+"</option>");
+											                }
+											                }catch(Exception e){
+											                    out.print(e.toString());
+														}
+														%>
+													</select>
+                                            	</div>
+                                            	<div class="form-group mt-4 mb-0">
+                                            		<button class="btn btn-primary btn-block" href="agregarcarrera.jsp">Registrar</button>
+                                            	</div>
+                                        	</form>
+                                    	</div>
+                                	</div>
+                            	</div>
+                        	</div>
+                    	</div>
                     </div>
                 </main>
             </div>
