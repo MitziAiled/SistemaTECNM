@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+ db:
+  image: mitziailed/tecnmmvc-mysql
+  restart: always
+  environment:
+   MYSQL_ROOT_PASSWORD: 'root'
+   MYSQL_DATABASE: 'tecnmmvc'
+  container_name: mysql-tecnm
+  ports:
+   - '3306:3306'
+
+ web:
+  image: mitziailed/tecnmmvc-apache-tomcat
+  restart: always
+  container_name: apache-tecnm
+  ports:
+   - '8080:8080'
